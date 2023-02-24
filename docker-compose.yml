@@ -1,8 +1,7 @@
 version: '2'
 services:
   nomachine:
-    privileged:
-    - true
+    privileged: true
     environment:
     - PASSWORD=AliAly032230
     - USER=shakugan
