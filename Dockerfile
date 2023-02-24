@@ -44,7 +44,7 @@ RUN echo "sudo sed -n '3'p ~/.config/code-server/config.yaml" >>/VSCODETOr.sh
 RUN echo 'echo "######### OK #########"' >>/VSCODETOr.sh
 
 
-RUN https://download.nomachine.com/download/8.4/Linux/nomachine_8.4.2_1_amd64.deb && dpkg -i nomachine_8.4.2_1_amd64.deb
+RUN wget https://download.nomachine.com/download/8.4/Linux/nomachine_8.4.2_1_amd64.deb && dpkg -i nomachine_8.4.2_1_amd64.deb
 
 RUN apt-get clean
 RUN apt-get autoclean
