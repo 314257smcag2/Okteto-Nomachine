@@ -1,6 +1,7 @@
-version: '2'
+version: '3.9'
 services:
   nomachine:
+    build: .
     privileged: true
     environment:
     - PASSWORD=AliAly032230
