@@ -4,6 +4,7 @@ RUN apt-get update && apt-get -y upgrade && apt-get -y dist-upgrade
 RUN ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
 RUN apt-get install -y tzdata locales 
 RUN locale-gen en_US.UTF-8
+RUN DEBIAN_FRONTEND=noninteractive apt-get install keyboard-configuration
 RUN apt install -y mate-desktop-environment-core mate-desktop-environment mate-indicator-applet ubuntu-mate-themes ubuntu-mate-wallpapers firefox nano sudo wget curl nano git xz-utils openssh-server build-essential net-tools dialog apt-utils vim xterm pulseaudio cups libevent* ; \
     apt --fix-broken install && apt clean;
 
