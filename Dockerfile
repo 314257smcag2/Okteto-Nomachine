@@ -12,7 +12,7 @@ RUN echo "America/New_York" > /etc/timezone && \
     dpkg-reconfigure --frontend=noninteractive locales && \
     update-locale LANG=$LANG
 
-RUN apt-get update -y && apt-get install -y software-properties-common python-software-properties python3-software-properties sudo
+RUN apt-get update -y && apt-get install -y software-properties-common python3 sudo
 RUN add-apt-repository universe
 RUN apt-get update -y && apt-get install -y vim xterm pulseaudio cups curl libgconf2-4 iputils-ping libnss3-1d libxss1 wget xdg-utils libpango1.0-0 fonts-liberation
 
