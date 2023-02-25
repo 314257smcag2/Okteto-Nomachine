@@ -5,8 +5,12 @@ RUN ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
 RUN apt-get install -y tzdata locales 
 RUN locale-gen en_US.UTF-8
 RUN DEBIAN_FRONTEND=noninteractive apt-get install keyboard-configuration -y
-RUN apt install -y mate-desktop-environment-core mate-desktop-environment mate-indicator-applet ubuntu-mate-themes ubuntu-mate-wallpapers firefox nano sudo wget curl nano git xz-utils openssh-server build-essential net-tools dialog apt-utils vim xterm pulseaudio cups libevent* ; \
-    apt --fix-broken install && apt clean;
+RUN apt-get update && apt-get install -y vim xterm pulseaudio cups 
+
+RUN apt-get install -y  mate-desktop-environment-core mate-desktop-environment mate-indicator-applet ubuntu-mate-themes ubuntu-mate-wallpapers firefox nano sudo
+RUN apt-get install -y wget curl nano git xz-utils openssh-server build-essential net-tools libevent*
+#RUN apt install -y mate-desktop-environment-core mate-desktop-environment mate-indicator-applet ubuntu-mate-themes ubuntu-mate-wallpapers firefox nano sudo wget curl nano git xz-utils openssh-server build-essential net-tools dialog apt-utils vim xterm pulseaudio cups libevent* ; \
+RUN apt-get --fix-broken install && apt clean
 
 # sshd
 RUN mkdir -p /var/run/sshd
