@@ -7,14 +7,14 @@ ENV LANGUAGE en_US.UTF-8
 RUN apt-get update && apt-get -y upgrade && apt-get -y dist-upgrade
 RUN ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
 RUN apt-get update && apt-get install -y man-db openssh-client vim wget zip unzip iputils-ping
-RUN apt-get install -y tzdata locales locales-all x11-xkb-utils
+RUN apt-get install -y tzdata locales locales-all x11-xkb-utils localectl list-x11-keymap-layouts
 
-RUN setxkbmap -layout us
-#RUN echo 'XKBMODEL="pc105"'
-#RUN echo 'XKBLAYOUT="us"' >> /etc/default/keyboard
-#RUN echo 'XKBVARIANT=""' >> /etc/default/keyboard
-#RUN echo 'XKBOPTIONS=""' >> /etc/default/keyboard
-#RUN echo 'BACKSPACE="guess"' >> /etc/default/keyboard
+#RUN setxkbmap -layout us
+RUN echo 'XKBMODEL="pc105"'
+RUN echo 'XKBLAYOUT="us"' >> /etc/default/keyboard
+RUN echo 'XKBVARIANT=""' >> /etc/default/keyboard
+RUN echo 'XKBOPTIONS=""' >> /etc/default/keyboard
+RUN echo 'BACKSPACE="guess"' >> /etc/default/keyboard
 #RUN dpkg-reconfigure console-data
 
 #RUN apt-get update && apt-get -y upgrade && apt-get -y dist-upgrade
