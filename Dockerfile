@@ -1,5 +1,9 @@
 FROM ubuntu:20.04
 
+ENV LC_ALL en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US.UTF-8
+
 RUN apt-get update && apt-get -y upgrade && apt-get -y dist-upgrade
 RUN ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
 RUN apt-get update && apt-get install -y man-db openssh-client vim wget zip unzip iputils-ping
@@ -12,10 +16,6 @@ RUN setxkbmap -layout us
 #RUN echo 'XKBOPTIONS=""' >> /etc/default/keyboard
 #RUN echo 'BACKSPACE="guess"' >> /etc/default/keyboard
 #RUN dpkg-reconfigure console-data
-
-ENV LC_ALL en_US.UTF-8
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US.UTF-8
 
 #RUN apt-get update && apt-get -y upgrade && apt-get -y dist-upgrade
 #RUN ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
