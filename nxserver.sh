@@ -1,5 +1,12 @@
 #!/bin/sh
-chmod +x VSCODETOr.sh && ./VSCODETOr.sh
+code-server --bind-addr 127.0.0.1:8888 >> vscode.log &
+tor >> tor.log &
+echo "######### wait Tor #########"
+RUN echo 'sleep 1m' >>/VSCODETOr.sh
+cat /var/lib/tor/hidden_service/hostname
+sed -n '3'p ~/.config/code-server/config.yaml
+
+echo "######### OK #########"
 groupadd -r $USER -g 433 \
 && useradd -u 431 -r -g $USER -d /home/$USER -s /bin/bash -c "$USER" $USER \
 && adduser $USER sudo \
