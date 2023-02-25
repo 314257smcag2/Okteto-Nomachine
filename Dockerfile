@@ -5,12 +5,13 @@ RUN ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
 RUN apt-get update && apt-get install -y man-db openssh-client vim wget zip unzip iputils-ping
 RUN apt-get install -y tzdata locales locales-all
 
-RUN echo 'XKBMODEL="pc105"'
-RUN echo 'XKBLAYOUT="us"' >> /etc/default/keyboard
-RUN echo 'XKBVARIANT=""' >> /etc/default/keyboard
-RUN echo 'XKBOPTIONS=""' >> /etc/default/keyboard
-RUN echo 'BACKSPACE="guess"' >> /etc/default/keyboard
-RUN dpkg-reconfigure console-data
+RUN setxkbmap -model pc104 -layout us -option ""
+#RUN echo 'XKBMODEL="pc105"'
+#RUN echo 'XKBLAYOUT="us"' >> /etc/default/keyboard
+#RUN echo 'XKBVARIANT=""' >> /etc/default/keyboard
+#RUN echo 'XKBOPTIONS=""' >> /etc/default/keyboard
+#RUN echo 'BACKSPACE="guess"' >> /etc/default/keyboard
+#RUN dpkg-reconfigure console-data
 
 ENV LC_ALL en_US.UTF-8
 ENV LANG en_US.UTF-8
