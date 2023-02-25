@@ -14,7 +14,7 @@ RUN echo "America/New_York" > /etc/timezone && \
 
 RUN apt-get update -y && apt-get install -y software-properties-common python3 sudo
 RUN add-apt-repository universe
-RUN apt-get update -y && apt-get install -y vim xterm pulseaudio cups curl libgconf2-4 iputils-ping libnss3-1d libxss1 wget xdg-utils libpango1.0-0 fonts-liberation
+RUN apt-get update -y && apt-get install -y vim xterm pulseaudio cups curl libgconf* iputils-ping libnss3* libxss1 wget xdg-utils libpango1.0-0 fonts-liberation
 
 ENV NOMACHINE_PACKAGE_NAME nomachine_8.4.2_1_amd64.deb
 ENV NOMACHINE_BUILD 8.4
