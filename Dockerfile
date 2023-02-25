@@ -1,5 +1,5 @@
-#FROM ubuntu:20.04
-FROM fullaxx/ubuntu-desktop:focal
+FROM ubuntu:22.04
+#FROM fullaxx/ubuntu-desktop:focal
 MAINTAINER SHAKUGAN <shakugan@disbox.net>
 
 ARG DEBIAN_FRONTEND=noninteractive
