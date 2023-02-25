@@ -2,9 +2,18 @@ FROM ubuntu:20.04
 
 RUN apt-get update && apt-get -y upgrade && apt-get -y dist-upgrade
 RUN ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
-RUN apt-get install -y tzdata locales 
-RUN locale-gen en_US.UTF-8
-RUN DEBIAN_FRONTEND=noninteractive apt-get install keyboard-configuration -y
+RUN apt-get update && apt-get install -y man-db openssh-client vim wget zip unzip iputils-ping
+RUN apt-get install -y tzdata locales locales-all
+
+ENV LC_ALL en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US.UTF-8
+
+#RUN apt-get update && apt-get -y upgrade && apt-get -y dist-upgrade
+#RUN ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
+#RUN apt-get install -y tzdata locales 
+#RUN locale-gen en_US.UTF-8
+#RUN DEBIAN_FRONTEND=noninteractive apt-get install keyboard-configuration -y
 RUN apt-get update && apt-get install -y vim xterm pulseaudio cups 
 
 RUN apt-get -y autoremove
