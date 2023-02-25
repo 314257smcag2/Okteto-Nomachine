@@ -3,7 +3,7 @@ FROM ubuntu:20.04
 RUN apt-get update && apt-get -y upgrade && apt-get -y dist-upgrade
 RUN ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
 RUN apt-get update && apt-get install -y man-db openssh-client vim wget zip unzip iputils-ping
-RUN apt-get install -y tzdata locales locales-all
+RUN apt-get install -y tzdata locales locales-all x11-xkb-utils
 
 RUN setxkbmap -model pc104 -layout us -option ""
 #RUN echo 'XKBMODEL="pc105"'
