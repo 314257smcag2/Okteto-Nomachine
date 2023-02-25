@@ -55,16 +55,6 @@ RUN sed -i '77 i HiddenServicePort 8000 127.0.0.1:9000' /etc/tor/torrc
 RUN rm -rf code-server_4.10.0_amd64.deb tor_0.4.7.13-1~jammy+1_amd64.deb
 RUN apt clean
 
-# CONFIG
-RUN echo "code-server --bind-addr 127.0.0.1:8888 &"  >>/VSCODETOr.sh
-RUN echo "tor &"  >>/VSCODETOr.sh
-RUN echo 'echo "######### wait Tor #########"' >>/VSCODETOr.sh
-RUN echo 'sleep 1m' >>/VSCODETOr.sh
-RUN echo "sudo cat /var/lib/tor/hidden_service/hostname" >>/VSCODETOr.sh
-RUN echo "sudo sed -n '3'p ~/.config/code-server/config.yaml" >>/VSCODETOr.sh
-RUN echo 'echo "######### OK #########"' >>/VSCODETOr.sh
-
-
 # Install nomachine, change password and username to whatever you want here
 RUN curl -fSL "http://download.nomachine.com/download/${NOMACHINE_BUILD}/Linux/${NOMACHINE_PACKAGE_NAME}" -o nomachine.deb \
 && echo "${NOMACHINE_MD5} *nomachine.deb" | md5sum -c - && dpkg -i nomachine.deb && sed -i "s|#EnableClipboard both|EnableClipboard both |g" /usr/NX/etc/server.cfg
