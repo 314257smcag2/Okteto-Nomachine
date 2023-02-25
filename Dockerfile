@@ -1,6 +1,6 @@
-FROM ubuntu:22.04
+FROM ubuntu:latest
 #FROM fullaxx/ubuntu-desktop:focal
-MAINTAINER SHAKUGAN <shakugan@disbox.net>
+#MAINTAINER SHAKUGAN <shakugan@disbox.net>
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -14,16 +14,16 @@ RUN echo "America/New_York" > /etc/timezone && \
     dpkg-reconfigure --frontend=noninteractive locales && \
     update-locale LANG=$LANG
 
-#RUN apt-get update -y && apt-get install -y software-properties-common python3 sudo
-#RUN add-apt-repository universe
-#RUN apt-get update -y && apt-get install -y vim xterm pulseaudio cups curl libgconf* iputils-ping libnss3* libxss1 wget xdg-utils libpango1.0-0 fonts-liberation
+RUN apt-get update -y && apt-get install -y software-properties-common python3 sudo
+RUN add-apt-repository universe
+RUN apt-get update -y && apt-get install -y vim xterm pulseaudio cups curl libgconf* iputils-ping libnss3* libxss1 wget xdg-utils libpango1.0-0 fonts-liberation
 
 ENV NOMACHINE_PACKAGE_NAME nomachine_8.4.2_1_amd64.deb
 ENV NOMACHINE_BUILD 8.4
 ENV NOMACHINE_MD5 35d9c2af67707a9e7cd764e3aeda4624
 
 # Install the mate-desktop-enviroment version you would like to have
-#RUN apt-get update -y && \
+RUN apt-get update -y && \
     apt-get install -y mate-desktop-environment-extras
 
 RUN apt-get update -y && apt-get install -y firefox libreoffice htop nano git vim wget curl xz-utils openssh-server build-essential net-tools libevent*
@@ -71,5 +71,5 @@ RUN curl -fSL "http://download.nomachine.com/download/${NOMACHINE_BUILD}/Linux/$
 
 
 ADD nxserver.sh /
-
+EXPOSE 4000
 ENTRYPOINT ["/nxserver.sh"]
