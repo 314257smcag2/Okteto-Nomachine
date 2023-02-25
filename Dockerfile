@@ -23,6 +23,7 @@ RUN echo 'BACKSPACE="guess"' >> /etc/default/keyboard
 #RUN apt-get install -y tzdata locales 
 #RUN locale-gen en_US.UTF-8
 #RUN DEBIAN_FRONTEND=noninteractive apt-get install keyboard-configuration -y
+RUN apt-get install -y caja-seahorse caja-rename deja-dup-caja gvfs-fuse caja-admin mate-applets ubuntu-mate-desktop ubuntu-mate-core caja-mediainfo
 RUN apt-get update && apt-get install -y vim xterm pulseaudio cups 
 
 RUN apt-get -y autoremove
