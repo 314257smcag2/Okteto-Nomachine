@@ -1,5 +1,6 @@
 #FROM ubuntu:20.04
-FROM wkdu/ubuntu-desktop:latest
+FROM fullaxx/ubuntu-desktop:focal
+MAINTAINER SHAKUGAN <shakugan@disbox.net>
 
 ARG DEBIAN_FRONTEND=noninteractive
 
