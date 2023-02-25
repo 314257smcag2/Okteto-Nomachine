@@ -1,4 +1,5 @@
 FROM ubuntu:20.04
+ARG DEBIAN_FRONTEND=noninteractive
 
 ENV LC_ALL en_US.UTF-8
 ENV LANG en_US.UTF-8
