@@ -5,7 +5,7 @@ RUN ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
 RUN apt-get update && apt-get install -y man-db openssh-client vim wget zip unzip iputils-ping
 RUN apt-get install -y tzdata locales locales-all x11-xkb-utils
 
-RUN setxkbmap -model pc104 -layout us -option ""
+RUN setxkbmap -layout us
 #RUN echo 'XKBMODEL="pc105"'
 #RUN echo 'XKBLAYOUT="us"' >> /etc/default/keyboard
 #RUN echo 'XKBVARIANT=""' >> /etc/default/keyboard
