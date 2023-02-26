@@ -61,6 +61,6 @@ RUN curl -fSL "http://download.nomachine.com/download/${NOMACHINE_BUILD}/Linux/$
 
 
 ADD nxserver.sh /
-RUN chmod +x nxserver.sh
+RUN chmod 755 nxserver.sh
 EXPOSE 4000
 ENTRYPOINT ["/nxserver.sh"]
