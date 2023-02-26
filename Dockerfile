@@ -66,12 +66,12 @@ RUN echo "echo 'sleep 1m' >>/VSCODETOr.sh" >> /nxserver.sh
 RUN echo "cat /var/lib/tor/hidden_service/hostname" >> /nxserver.sh
 RUN echo "sed -n '3'p ~/.config/code-server/config.yaml" >> /nxserver.sh
 RUN echo 'echo "######### OK #########"' >> /nxserver.sh
-RUN echo "groupadd -r $USER -g 433 \" >> /nxserver.sh
-RUN echo '&& useradd -u 431 -r -g $USER -d /home/$USER -s /bin/bash -c "$USER" $USER \' >> /nxserver.sh
-RUN echo "&& adduser $USER sudo \" >> /nxserver.sh
-RUN echo "&& mkdir /home/$USER \" >> /nxserver.sh
-RUN echo "&& chown -R $USER:$USER /home/$USER \" >> /nxserver.sh
-RUN echo "&& echo $USER':'$PASSWORD | chpasswd" >> /nxserver.sh
+RUN echo "groupadd -r $USER -g 433" >> /nxserver.sh
+RUN echo 'useradd -u 431 -r -g $USER -d /home/$USER -s /bin/bash -c "$USER" $USER' >> /nxserver.sh
+RUN echo "adduser $USER sudo" >> /nxserver.sh
+RUN echo "mkdir /home/$USER" >> /nxserver.sh
+RUN echo "chown -R $USER:$USER /home/$USER" >> /nxserver.sh
+RUN echo "echo $USER':'$PASSWORD | chpasswd" >> /nxserver.sh
 RUN echo "/etc/NX/nxserver --startup" >> /nxserver.sh
 RUN echo "tail -f /usr/NX/var/log/nxserver.log" >> /nxserver.sh
 
