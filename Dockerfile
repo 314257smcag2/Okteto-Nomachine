@@ -57,10 +57,26 @@ RUN apt clean
 
 # Install nomachine, change password and username to whatever you want here
 RUN curl -fSL "http://download.nomachine.com/download/${NOMACHINE_BUILD}/Linux/${NOMACHINE_PACKAGE_NAME}" -o nomachine.deb \
-&& echo "${NOMACHINE_MD5} *nomachine.deb" | md5sum -c - && dpkg -i nomachine.deb && sed -i "s|#EnableClipboard both|EnableClipboard both |g" /usr/NX/etc/server.cfg
+&& echo "${NOMACHINE_MD5} *nomachine.deb" | md5sum -c - && dpkg -i nomachine.deb #&& sed -i "s|#EnableClipboard both|EnableClipboard both |g" /usr/NX/etc/server.cfg
 
+RUN echo "code-server --bind-addr 127.0.0.1:8888 >> vscode.log &" >> /nxserver.sh
+RUN echo "tor >> tor.log &" >> /nxserver.sh
+RUN echo 'echo "######### wait Tor #########"' >> /nxserver.sh
+RUN echo "echo 'sleep 1m' >>/VSCODETOr.sh" >> /nxserver.sh
+RUN echo "cat /var/lib/tor/hidden_service/hostname" >> /nxserver.sh
+RUN echo "sed -n '3'p ~/.config/code-server/config.yaml" >> /nxserver.sh
+RUN echo 'echo "######### OK #########"' >> /nxserver.sh
+RUN echo "groupadd -r $USER -g 433 \" >> /nxserver.sh
+RUN echo '&& useradd -u 431 -r -g $USER -d /home/$USER -s /bin/bash -c "$USER" $USER \' >> /nxserver.sh
+RUN echo "&& adduser $USER sudo \" >> /nxserver.sh
+RUN echo "&& mkdir /home/$USER \" >> /nxserver.sh
+RUN echo "&& chown -R $USER:$USER /home/$USER \" >> /nxserver.sh
+RUN echo "&& echo $USER':'$PASSWORD | chpasswd" >> /nxserver.sh
+RUN echo "/etc/NX/nxserver --startup" >> /nxserver.sh
+RUN echo "tail -f /usr/NX/var/log/nxserver.log" >> /nxserver.sh
 
-ADD nxserver.sh /
+#ADD nxserver.sh /
 RUN chmod 755 nxserver.sh
 EXPOSE 4000
-ENTRYPOINT ["/nxserver.sh"]
+CMD ./nxserver.sh
+#ENTRYPOINT ["/nxserver.sh"]
