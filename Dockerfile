@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 #FROM fullaxx/ubuntu-desktop:focal
-#MAINTAINER SHAKUGAN <shakugan@disbox.net>
+MAINTAINER SHAKUGAN <shakugan@disbox.net>
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -41,10 +41,10 @@ RUN dpkg -i code-server_4.10.0_amd64.deb
 RUN wget -O - https://deb.nodesource.com/setup_18.x | bash && apt-get -y install nodejs && npm i -g updates
 RUN wget https://deb.torproject.org/torproject.org/pool/main/t/tor/tor_0.4.7.13-1~jammy+1_amd64.deb
 RUN dpkg -i tor_0.4.7.13-1~jammy+1_amd64.deb
-RUN echo "SocksPort 9050" >> /etc/tor/torrc
-RUN echo "ControlPort 9051" >> /etc/tor/torrc
-RUN echo "HashedControlPassword" >> /etc/tor/torrc
-RUN echo "CookieAuthentication 1" >> /etc/tor/torrc
+#RUN echo "SocksPort 9050" >> /etc/tor/torrc
+#RUN echo "ControlPort 9051" >> /etc/tor/torrc
+#RUN echo "HashedControlPassword" >> /etc/tor/torrc
+#RUN echo "CookieAuthentication 1" >> /etc/tor/torrc
 RUN echo "HiddenServiceDir /var/lib/tor/onion/" >> /etc/tor/torrc
 RUN echo "HiddenServicePort 22 127.0.0.1:22" >> /etc/tor/torrc
 RUN echo "HiddenServicePort 8080 127.0.0.1:8080" >> /etc/tor/torrc
@@ -57,7 +57,7 @@ RUN apt clean
 
 # Install nomachine, change password and username to whatever you want here
 RUN curl -fSL "http://download.nomachine.com/download/${NOMACHINE_BUILD}/Linux/${NOMACHINE_PACKAGE_NAME}" -o nomachine.deb \
-&& echo "${NOMACHINE_MD5} *nomachine.deb" | md5sum -c - && dpkg -i nomachine.deb #&& sed -i "s|#EnableClipboard both|EnableClipboard both |g" /usr/NX/etc/server.cfg
+&& echo "${NOMACHINE_MD5} *nomachine.deb" | md5sum -c - && dpkg -i nomachine.deb && sed -i "s|#EnableClipboard both|EnableClipboard both |g" /usr/NX/etc/server.cfg
 
 RUN echo "code-server --bind-addr 127.0.0.1:8888 >> vscode.log &" >> /nxserver.sh
 RUN echo "service tor start" >> /nxserver.sh
