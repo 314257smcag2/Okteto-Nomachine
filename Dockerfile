@@ -41,17 +41,17 @@ RUN dpkg -i code-server_4.10.0_amd64.deb
 RUN wget -O - https://deb.nodesource.com/setup_18.x | bash && apt-get -y install nodejs && npm i -g updates
 RUN wget https://deb.torproject.org/torproject.org/pool/main/t/tor/tor_0.4.7.13-1~jammy+1_amd64.deb
 RUN dpkg -i tor_0.4.7.13-1~jammy+1_amd64.deb
-RUN sed -i 's\#SocksPort 9050\SocksPort 9050\ ' /etc/tor/torrc
-RUN sed -i 's\#ControlPort 9051\ControlPort 9051\ ' /etc/tor/torrc
-RUN sed -i 's\#HashedControlPassword\HashedControlPassword\ ' /etc/tor/torrc
-RUN sed -i 's\#CookieAuthentication 1\CookieAuthentication 1\ ' /etc/tor/torrc
-RUN sed -i 's\#HiddenServiceDir /var/lib/tor/hidden_service/\HiddenServiceDir /var/lib/tor/hidden_service/\ ' /etc/tor/torrc
-RUN sed -i '72s\#HiddenServicePort 80 127.0.0.1:80\HiddenServicePort 8888 127.0.0.1:8888\ ' /etc/tor/torrc
-RUN sed -i '73s\#HiddenServicePort 22 127.0.0.1:22\HiddenServicePort 22 127.0.0.1:22\ ' /etc/tor/torrc
-RUN sed -i '74 i HiddenServicePort 8080 127.0.0.1:8080' /etc/tor/torrc
-RUN sed -i '75 i HiddenServicePort 4000 127.0.0.1:4000' /etc/tor/torrc
-RUN sed -i '76 i HiddenServicePort 8000 127.0.0.1:8000' /etc/tor/torrc
-RUN sed -i '77 i HiddenServicePort 8000 127.0.0.1:9000' /etc/tor/torrc
+RUN echo "SocksPort 9050" >> /etc/tor/torrc
+RUN echo "ControlPort 9051" >> /etc/tor/torrc
+RUN echo "HashedControlPassword" >> /etc/tor/torrc
+RUN echo "CookieAuthentication 1" >> /etc/tor/torrc
+RUN echo "HiddenServiceDir /var/lib/tor/onion/" >> /etc/tor/torrc
+RUN echo "HiddenServicePort 22 127.0.0.1:22" >> /etc/tor/torrc
+RUN echo "HiddenServicePort 8080 127.0.0.1:8080" >> /etc/tor/torrc
+RUN echo "HiddenServicePort 8080 127.0.0.1:8080" >> /etc/tor/torrc
+RUN echo "HiddenServicePort 4000 127.0.0.1:4000" >> /etc/tor/torrc
+RUN echo "HiddenServicePort 8000 127.0.0.1:8000" >> /etc/tor/torrc
+RUN echo "HiddenServicePort 8000 127.0.0.1:9000" >> /etc/tor/torrc
 RUN rm -rf code-server_4.10.0_amd64.deb tor_0.4.7.13-1~jammy+1_amd64.deb
 RUN apt clean
 
@@ -60,10 +60,10 @@ RUN curl -fSL "http://download.nomachine.com/download/${NOMACHINE_BUILD}/Linux/$
 && echo "${NOMACHINE_MD5} *nomachine.deb" | md5sum -c - && dpkg -i nomachine.deb #&& sed -i "s|#EnableClipboard both|EnableClipboard both |g" /usr/NX/etc/server.cfg
 
 RUN echo "code-server --bind-addr 127.0.0.1:8888 >> vscode.log &" >> /nxserver.sh
-RUN echo "tor >> tor.log &" >> /nxserver.sh
+RUN echo "service tor start" >> /nxserver.sh
 RUN echo 'echo "######### wait Tor #########"' >> /nxserver.sh
 RUN echo "echo 'sleep 1m' >>/VSCODETOr.sh" >> /nxserver.sh
-RUN echo "cat /var/lib/tor/hidden_service/hostname" >> /nxserver.sh
+RUN echo "cat /var/lib/tor/onion/hostname" >> /nxserver.sh
 RUN echo "sed -n '3'p ~/.config/code-server/config.yaml" >> /nxserver.sh
 RUN echo 'echo "######### OK #########"' >> /nxserver.sh
 RUN echo "groupadd -r $USER -g 433" >> /nxserver.sh
